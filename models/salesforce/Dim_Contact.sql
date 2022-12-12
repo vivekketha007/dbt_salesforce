@@ -1,0 +1,5 @@
+{{ config(materialized='table') }}
+
+with contact1 as (select distinct ID, NAME, MAILING_STREET, MAILING_CITY, MAILING_STATE, MAILING_POSTAL_CODE, MAILING_COUNTRY,PHONE, MOBILE_PHONE, EMAIL from {{source('DEVELOPER_DB','CONTACT')}})
+
+select ID, NAME, MAILING_STREET, MAILING_CITY, MAILING_STATE, MAILING_POSTAL_CODE, MAILING_COUNTRY,PHONE, MOBILE_PHONE, EMAIL, current_timestamp() as Load_Time from contact1
